@@ -8,9 +8,8 @@ osx_image: xcode6.4
 
 env:
   matrix:
-    
-    - CONDA_R=3.3.2
-    - CONDA_R=3.4.1
+    - CONFIG=osx_
+
   global:
     # The BINSTAR_TOKEN secure variable. This is defined canonically in conda-forge.yml.
     - secure: "BUtQ/2R/nEQ7maqfnC6uXJwG+K+a3ur9OSVbO4kHrYgud0jbUJjdeN9ONwUBC+4kmw1acuaGZGP5P00BIoz+294hFqeD3RJoFCR6VYcFSu3YYUKPwouGoWJOD52aWHZFMCOWAVUU175wyrJFVwALxce/8VeLU1vj6UmhkXOzUBebJMcBnEBSSDQxbLBiBpiXd6siqTEK0MGZmCocxjuXdMZi/2ljTUwY9gvGFaWldIjXApdQDi9g29/3zfp6y7lNoAYS953l+zROaWZTdlGEvfD53PBPnmWFmpLdC+Pd6nb76wDf8FhcTlqtWsw/CBGdP5eMezTYPGwCYGtlm/0rhvGwkDe4hN8+/J6NQPZebdFLgObTYhCBadl9OQhV4XlwjDpbZ3FOEfT62Q4IHoOU/WFjP3DFR5L3sEF5br7EywssZmOxppskseYPgC8/i+L3XbM+XuY0ZjQau1BGoD90mHy0+Gk3oXS7FplzcvFHIgkPHI2DMhV29VksaGNB4fcc1sZ3o0p5tXvnDgg6xobfmEWnArc7JpGbgBtLlP6lKAxeeRZZp0MrOQV3+8HHlUZxFO11E8n55olrEBuu5X7/F9jh5kiCUiyuY6ReNE4eyh5ZMZBn5/x1BwrWhXZHHz2vcyeO+MYgx/o8y3JU3s2VzirAR8YiBszpb+8SKr3e+OA="
@@ -19,7 +18,7 @@ env:
 before_install:
     # Fast finish the PR.
     - |
-      (curl https://raw.githubusercontent.com/conda-forge/conda-forge-build-setup-feedstock/master/recipe/ff_ci_pr_build.py | \
+      (curl https://raw.githubusercontent.com/conda-forge/conda-forge-ci-setup-feedstock/master/recipe/ff_ci_pr_build.py | \
           python - -v --ci "travis" "${TRAVIS_REPO_SLUG}" "${TRAVIS_BUILD_NUMBER}" "${TRAVIS_PULL_REQUEST}") || exit 1
 
     # Remove homebrew.
@@ -51,10 +50,10 @@ install:
       conda config --add channels defaults
       conda config --add channels conda-forge
       conda config --set show_channel_urls true
-      conda install --yes --quiet conda-forge-build-setup
+      conda install --yes --quiet conda-forge-ci-setup=1
       source run_conda_forge_build_setup
 
 script:
-  - conda build ./recipe
+  - conda build ./recipe -m ./.ci_support/${CONFIG}.yaml
 
-  - upload_or_check_non_existence ./recipe conda-forge --channel=main
+  - upload_or_check_non_existence ./recipe conda-forge --channel=main -m ./.ci_support/${CONFIG}.yaml
