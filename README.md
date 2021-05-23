@@ -3,7 +3,7 @@ About r-algdesign
 
 Home: https://github.com/jvbraun/AlgDesign
 
-Package license: GPL (>= 2)
+Package license: GPL-2.0-or-later
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-algdesign-feedstock/blob/master/LICENSE.txt)
 
