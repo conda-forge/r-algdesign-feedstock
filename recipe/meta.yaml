@@ -43,7 +43,7 @@ test:
 
 about:
   home: https://github.com/jvbraun/AlgDesign
-  license: GPL (>= 2)
+  license: GPL-2.0-or-later
   summary: Algorithmic experimental designs. Calculates exact and approximate theory experimental
     designs for D,A, and I criteria. Very large designs may be created. Experimental
     designs may be blocked or blocked designs created from a candidate list, using several
