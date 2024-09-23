@@ -1,4 +1,4 @@
-{% set version = "1.2.1" %}
+{% set version = "1.2.1.1" %}
 {% set posix = 'm2-' if win else '' %}
 
 package:
@@ -10,10 +10,10 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/AlgDesign_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/AlgDesign/AlgDesign_{{ version }}.tar.gz
-  sha256: 5989626c526bd7c3d9bdda326c962056879be03392065a0b7ddb9b8cf9309d05
+  sha256: f6caef6e86feb88eea60c0400acaf145c2445c09fd608a47e66694cc6f02cc54
 
 build:
-  number: 3
+  number: 0
   skip: true  # [win32]
   rpaths:
     - lib/R/lib/
